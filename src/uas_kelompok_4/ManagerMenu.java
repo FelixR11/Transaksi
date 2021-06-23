@@ -99,7 +99,9 @@ public class ManagerMenu extends javax.swing.JFrame {
 
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
-
+        Stock stock = new Stock();
+        stock.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_bt_updateActionPerformed
 
     private void bt_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logoutActionPerformed

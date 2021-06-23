@@ -379,6 +379,8 @@ class Login extends JFrame implements ActionListener{
 
             if(transaksi.checkData(tx_lgUsername.getText(), pf_lgPw.getText(), "\\dataKasir.txt") == 1){
             	// CLASS penjualan
+                Penjualan penjualan = new Penjualan();
+                penjualan.setVisible(true);
             	loginFrame.setVisible(false);
             }
 	}else if(ae.getSource() == bt_Login && this.rb_manager.isSelected()){

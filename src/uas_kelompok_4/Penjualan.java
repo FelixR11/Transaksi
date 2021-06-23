@@ -409,7 +409,6 @@ public class Penjualan extends javax.swing.JFrame {
         tx_tHarga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(802, 751));
 
         tx_tJumlah.setOpaque(false);
 
