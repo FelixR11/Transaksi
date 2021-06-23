@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -76,6 +77,39 @@ public class Penjualan extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Penjualan.class.getName()).log(Level.SEVERE, null, ex);
         }   
+    }
+    
+    int checkData(String user, String pass, String namaFile){
+        int nilai = 0;
+        String Username, Password;
+	try{
+            RandomAccessFile raf = new RandomAccessFile(file + namaFile, "rw");
+            Username = raf.readLine();
+            Password = raf.readLine();
+            
+            for(int i=0; i<(ln-2); i+=5){
+                Username = raf.readLine().substring(11);
+		Password = raf.readLine().substring(11);
+                
+                if(user.equals(Username) && pass.equals(Password)){
+                    JOptionPane.showMessageDialog(null, "Login Berhasil!");
+                    nilai = 1;
+                    break;
+		}else if(i == (ln-6)){
+                    JOptionPane.showMessageDialog(null, "Username atau Password Salah!");
+                    nilai = 0;
+                    break;
+		}
+		for (int k=1; k<=3; k++){
+                    raf.readLine();
+		}
+            }
+        }catch(FileNotFoundException ex){
+            Logger.getLogger(Transaksi.notepad.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(IOException ex){
+            Logger.getLogger(Transaksi.notepad.class.getName()).log(Level.SEVERE, null, ex);
+	}
+        return nilai;
     }
 
     void countLines2(String namaFile){
@@ -421,12 +455,22 @@ public class Penjualan extends javax.swing.JFrame {
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         bt_logout.setText("Logout");
+        bt_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_logoutActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Total");
 
         jLabel4.setText("Cash");
 
         bt_cancle.setText("Cancle");
+        bt_cancle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cancleActionPerformed(evt);
+            }
+        });
 
         bt_refresh.setText("Refresh");
 
@@ -581,11 +625,46 @@ public class Penjualan extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tx_tStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tx_tStokActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tx_tStokActionPerformed
+
+    private void bt_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_logoutActionPerformed
+        // TODO add your handling code here:
+        Login login = new Login();
+        login.startFrameLogin();
+        setVisible(false);
+
+        Transaksi transaksi = new Transaksi();
+        transaksi.nilai = 0;
+    }//GEN-LAST:event_bt_logoutActionPerformed
+
+    private void bt_cancleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancleActionPerformed
+        // TODO add your handling code here:
+        Transaksi transaksi = new Transaksi();
+        transaksi.createFolder();
+        transaksi.readFile("\\dataManager.txt");
+        countLines2("\\dataManager.txt");
+        
+        JTextField username = new JTextField();
+        JPasswordField password = new JPasswordField();
+        Object[] message = {
+            "Username : ", username,
+            "Password : ", password
+        };
+        
+        int option = JOptionPane.showConfirmDialog(null, message, "Login", JOptionPane.OK_CANCEL_OPTION);
+        
+        if(checkData(username.getText(), password.getText(), "\\dataManager.txt") == 1){
+            
+            	
+        }else{
+            JOptionPane.showMessageDialog(null, "Gagal Membatalkan pesanan!");
+        }
+    }//GEN-LAST:event_bt_cancleActionPerformed
 
     /**
      * @param args the command line arguments
