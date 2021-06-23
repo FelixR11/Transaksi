@@ -246,10 +246,7 @@ public class Stock extends javax.swing.JFrame {
 
         tb_items.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Jenis", "Nama", "Stok", "Harga", "Tanggal Masuk", "Tanggal Kadaluarsa"
@@ -264,6 +261,11 @@ public class Stock extends javax.swing.JFrame {
         jLabel4.setText("Stok");
 
         cb_nama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Pilih -" }));
+        cb_nama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_namaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -337,6 +339,13 @@ public class Stock extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    void addComboBox(){
+        createFolder();
+        readFile("\\DataStok.txt");
+        countLines2("\\DataStok.txt");
+        checkCombo("\\DataStok.txt");
+    }
+
     private void bt_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_updateActionPerformed
         // TODO add your handling code here:
         if(tx_stok.getText().isEmpty() || tx_harga.getText().isEmpty()
@@ -373,6 +382,11 @@ public class Stock extends javax.swing.JFrame {
         mMenu.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_bt_backActionPerformed
+
+    private void cb_namaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_namaActionPerformed
+        // TODO add your handling code here:
+        selectedComboBox = cb_nama.getSelectedItem().toString();
+    }//GEN-LAST:event_cb_namaActionPerformed
 
     /**
      * @param args the command line arguments

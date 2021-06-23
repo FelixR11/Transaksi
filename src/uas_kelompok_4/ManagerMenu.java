@@ -88,6 +88,7 @@ public class ManagerMenu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_inputActionPerformed

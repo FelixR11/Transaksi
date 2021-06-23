@@ -629,6 +629,7 @@ public class Penjualan extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tx_tStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tx_tStokActionPerformed
